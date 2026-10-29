@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /contacto/gracias/
-
-Sitemap: https://arteypublicidadhuelva.netlify.app/sitemap.xml
