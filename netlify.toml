@@ -1,0 +1,36 @@
+# Configuración de despliegue en Netlify
+# Netlify ejecuta el generador y publica la carpeta dist/.
+# Para el dominio definitivo: cambia SITE_URL en contenido.py y vuelve a ejecutar build.py.
+
+[build]
+  # La web ya va compilada en dist/ dentro del repositorio: Netlify solo tiene que publicarla.
+  # Si cambias contenido.py, ejecuta "python3 build.py" en tu ordenador y sube también dist/.
+  publish = "dist"
+  command = ""
+
+# Cabeceras de seguridad
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; form-action 'self'; frame-ancestors 'self'; base-uri 'self'"
+
+# Caché larga para tipografías e imágenes; CSS y JS se revalidan
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+# Redirección del subdominio de Netlify al dominio definitivo (activar cuando exista):
+# [[redirects]]
+#   from = "https://arteypublicidadhuelva.netlify.app/*"
+#   to = "https://www.tudominio.es/:splat"
+#   status = 301
+#   force = true
