@@ -1449,4 +1449,119 @@ DESTACADOS = [
     ("imprenta", "imprenta-07"),
 ]
 
+# Ejemplos de lo que se hace en cada servicio (se muestran en la portada y en cada página)
+PRODUCTOS = {
+ "imprenta": [
+  "Folletos y flyers",
+  "Dípticos y trípticos",
+  "Carteles",
+  "Tarjetas de visita",
+  "Catálogos y revistas",
+  "Calendarios",
+  "Talonarios y facturas",
+  "Sobres y carpetas",
+  "Papel con membrete",
+  "Pegatinas y etiquetas",
+  "Menús y cartas de restaurante",
+  "Invitaciones y entradas"
+ ],
+ "merchandising": [
+  "Regalo publicitario",
+  "Bolígrafos",
+  "Llaveros",
+  "Pulseras",
+  "Tazas",
+  "Camisetas",
+  "Polos y ropa laboral",
+  "Gorras",
+  "Bolsas y mochilas",
+  "Abanicos",
+  "Mecheros",
+  "Bordados con logotipo",
+  "Lanyards y acreditaciones",
+  "Banderas y cintas"
+ ],
+ "rotulacion": [
+  "Rótulos de fachada",
+  "Rótulos luminosos",
+  "Letras corpóreas",
+  "Banderolas",
+  "Vinilos de escaparate",
+  "Vinilos decorativos",
+  "Rotulación de vehículos",
+  "Rotulación de flotas",
+  "Placas y señalética",
+  "Decoración de interiores",
+  "Toldos rotulados",
+  "Lonas para fachadas"
+ ],
+ "gran-formato": [
+  "Lonas",
+  "Roll-ups",
+  "Photocalls",
+  "Fotomurales",
+  "Vinilos de gran tamaño",
+  "Cartón pluma",
+  "PVC y forex",
+  "Vallados de obra",
+  "Displays para ferias",
+  "Pancartas",
+  "Carteles de gran tamaño"
+ ],
+ "publicidad-exterior": [
+  "Vallas publicitarias",
+  "Mupis",
+  "Lonas para fachadas",
+  "Vallados de obra",
+  "Banderolas de calle",
+  "Carteles de obra",
+  "Monopostes",
+  "Publicidad en vehículos"
+ ],
+ "campanas": [
+  "Anuncios en prensa",
+  "Cuñas de radio",
+  "Anuncios de televisión",
+  "Publicidad exterior",
+  "Cartelería",
+  "Buzoneo y folletos",
+  "Campañas en redes sociales",
+  "Material para el punto de venta"
+ ],
+ "marketing-creatividad": [
+  "Estrategia de comunicación",
+  "Ideas y conceptos de campaña",
+  "Lanzamiento de marcas",
+  "Campañas de temporada",
+  "Inauguraciones y aperturas",
+  "Organización de eventos",
+  "Naming y eslóganes",
+  "Material para ferias"
+ ],
+ "diseno-web-redes": [
+  "Logotipos",
+  "Identidad corporativa",
+  "Manual de marca",
+  "Diseño de carteles",
+  "Diseño de folletos",
+  "Diseño de envases y etiquetas",
+  "Páginas web",
+  "Tiendas en redes sociales",
+  "Publicaciones para redes",
+  "Gestión de redes sociales"
+ ],
+ "mascotas-corporeos": [
+  "Mascotas corporativas",
+  "Disfraces de mascota",
+  "Cabezas de mascota",
+  "Figuras corpóreas",
+  "Letras corpóreas",
+  "Logotipos en relieve",
+  "Elementos para carrozas",
+  "Escudos y elementos para clubes",
+  "Photocalls con figuras",
+  "Decorados para eventos"
+ ]
+}
+
 SERV = {s["slug"]: s for s in SERVICIOS}

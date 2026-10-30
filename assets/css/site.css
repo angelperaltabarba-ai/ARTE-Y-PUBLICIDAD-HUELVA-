@@ -366,3 +366,21 @@ ul{padding-left:1.1em}
 /* Una sola foto: no ocupar todo el ancho */
 .galeria--1{max-width:44rem}
 @media (min-width:640px){.galeria--2{max-width:none}}
+
+/* ---------- Iconos de servicio y listas de productos ---------- */
+.icono{flex:none;color:var(--azul)}
+.familia__titulo{display:flex;align-items:center;gap:.8rem}
+.familia__titulo .icono{width:36px;height:36px;padding:6px;border-radius:50%;background:var(--azul-claro);box-sizing:content-box}
+.familia a:hover .icono{background:var(--azul);color:#fff}
+.familia a .familia__texto{color:#2C3846}
+.familia a{align-items:center}
+.panel__grupo a{display:flex;gap:.7rem;align-items:flex-start}
+.panel__grupo a .icono{width:26px;height:26px;margin-top:.1rem}
+.cabecera-productos{display:flex;align-items:center;gap:.9rem;margin-bottom:var(--s3)}
+.cabecera-productos h2{margin:0}
+.cabecera-productos .icono{width:44px;height:44px}
+.productos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,14rem),1fr));gap:.6rem}
+.productos li{display:flex;align-items:center;gap:.6rem;background:#fff;border:1px solid var(--linea);padding:.75rem .9rem;font-size:1.0625rem;border-radius:2px}
+.productos li::before{content:"";flex:none;width:8px;height:8px;background:var(--azul);transform:rotate(45deg)}
+.productos__nota{margin-top:var(--s3)}
+@media (prefers-reduced-motion:no-preference){.familia a .icono{transition:background-color .2s,color .2s}}

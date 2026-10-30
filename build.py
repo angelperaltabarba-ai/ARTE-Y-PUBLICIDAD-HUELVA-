@@ -52,6 +52,28 @@ def pendiente_bloque(titulo, txt):
 CUR = ' aria-current="page"'
 ICONO_FLECHA = '<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>'
 
+
+# ---------------------------------------------------------------- iconos de servicio (dibujo propio, trazo de 1,6)
+_SVG = '<svg class="icono" viewBox="0 0 32 32" width="32" height="32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">{}</svg>'
+ICONOS = {
+ "imprenta": '<path d="M9 12V4h14v8"/><rect x="4" y="12" width="24" height="11" rx="2"/><path d="M9 19h14v9H9z"/><path d="M12 23h8M12 26h5"/><circle cx="24" cy="16" r="1" fill="currentColor"/>',
+ "merchandising": '<rect x="5" y="12" width="22" height="16" rx="1.5"/><path d="M3 8h26v4H3zM16 8v20"/><path d="M16 8c-2-4-7-5-7-2s4 2 7 2c3 0 7 1 7-2s-5-2-7 2"/>',
+ "rotulacion": '<path d="M4 13h24M5 13l1.5-7h19L27 13"/><path d="M6 13v15h20V13"/><rect x="9" y="17" width="6" height="11"/><rect x="18" y="17" width="5" height="5"/><path d="M10 9.5h12"/>',
+ "gran-formato": '<rect x="3" y="5" width="26" height="15" rx="1"/><path d="M8 20l-3 8M24 20l3 8M16 20v8"/><path d="M7 15l5-5 4 4 3-3 5 5"/>',
+ "publicidad-exterior": '<rect x="4" y="4" width="24" height="13" rx="1"/><path d="M16 17v11M11 28h10M9 9h9M9 12h14"/>',
+ "campanas": '<path d="M5 13v6h4l11 6V7L9 13H5z"/><path d="M9 19l2 7h3l-1.5-5"/><path d="M24 12a5 5 0 0 1 0 8M26.5 9a9 9 0 0 1 0 14"/>',
+ "marketing-creatividad": '<path d="M12 21c-2.5-2-4-4.5-4-8a8 8 0 0 1 16 0c0 3.5-1.5 6-4 8v3h-8z"/><path d="M12 27h8M14 30h4M16 10v6M13.5 13.5h5"/>',
+ "diseno-web-redes": '<rect x="3" y="5" width="26" height="17" rx="1.5"/><path d="M11 28h10M16 22v6"/><path d="M8 17l4-4 3 3 5-6 4 5"/><circle cx="10" cy="10" r="1.3"/>',
+ "mascotas-corporeos": '<circle cx="16" cy="17" r="10"/><path d="M8.5 10.5L7 4l6 3.5M23.5 10.5L25 4l-6 3.5"/><circle cx="12.5" cy="16" r="1.2" fill="currentColor"/><circle cx="19.5" cy="16" r="1.2" fill="currentColor"/><path d="M12.5 21c2 2 5 2 7 0"/>',
+}
+def icono(slug): return _SVG.format(ICONOS.get(slug, ""))
+
+def ejemplos(slug, n=4):
+    p = getattr(C, "PRODUCTOS", {}).get(slug, [])
+    if not p: return ""
+    sel = [p[0]] + [x[0].lower() + x[1:] for x in p[1:n]]
+    return ", ".join(sel) + " y mucho más"
+
 # ---------------------------------------------------------------- datos estructurados
 def jsonld_organizacion():
     org = {
@@ -96,7 +118,7 @@ def cabecera(ctx, actual):
     grupos = ""
     for gid, gnom in C.GRUPOS:
         items = "".join(
-            f'<li><a href="{ctx.a(s["slug"])}"{CUR if actual == s["slug"] else ""}><strong>{esc(s["nav"])}</strong><span>{esc(s["resumen"])}</span></a></li>'
+            f'<li><a href="{ctx.a(s["slug"])}"{CUR if actual == s["slug"] else ""}>{icono(s["slug"])}<span><strong>{esc(s["nav"])}</strong><span>{esc(s["resumen"])}</span></span></a></li>'
             for s in C.SERVICIOS if s["grupo"] == gid)
         grupos += f'<div class="panel__grupo"><h2>{esc(gnom)}</h2><ul>{items}</ul></div>'
     def li(dest, txt):
@@ -335,6 +357,15 @@ def pagina_servicio(s):
   <div><h2>{esc(s["necesidad_h2"])}</h2></div><div>{necesidad}</div>
 </div></section>''')
 
+    prods = getattr(C, "PRODUCTOS", {}).get(s["slug"], [])
+    if prods:
+        lis = "".join(f"<li>{esc(p)}</li>" for p in prods)
+        partes.append(f'''<section class="seccion seccion--suave"><div class="contenedor">
+  <div class="cabecera-productos">{icono(s["slug"])}<h2>Qué hacemos en {esc(s["nav"][0].lower() + s["nav"][1:])}</h2></div>
+  <ul class="productos">{lis}</ul>
+  <p class="productos__nota">¿Buscas algo que no está en la lista? <a href="{ctx.a("contacto")}?servicio={s["slug"]}">Pregúntanos</a>: si se puede imprimir, rotular o fabricar, te lo preparamos.</p>
+</div></section>''')
+
     if s.get("terminos"):
         dl = "".join(f"<div><dt>{esc(t)}</dt><dd>{L(d)}</dd></div>" for t, d in s["terminos"])
         partes.append(f'<section class="seccion seccion--suave"><div class="contenedor"><h2>Los soportes, explicados</h2><dl class="terminos">{dl}</dl>'
@@ -388,7 +419,7 @@ def pagina_inicio():
     ctx = Ctx("")
     fams = ""
     for gid, gnom in C.GRUPOS:
-        items = "".join(f'<li><a href="{ctx.a(s["slug"])}"><strong>{esc(s["nav"])}</strong><span>{esc(s["resumen"])}</span></a></li>'
+        items = "".join(f'<li><a href="{ctx.a(s["slug"])}"><span class="familia__titulo">{icono(s["slug"])}<strong>{esc(s["nav"])}</strong></span><span class="familia__texto">{esc(ejemplos(s["slug"]) or s["resumen"])}</span></a></li>'
                         for s in C.SERVICIOS if s["grupo"] == gid)
         fams += f'<div class="familia"><h3>{esc(gnom)}</h3><ul>{items}</ul></div>'
     proyectos = ""
