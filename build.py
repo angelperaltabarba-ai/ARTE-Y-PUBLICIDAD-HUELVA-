@@ -154,7 +154,7 @@ def pie(ctx):
         <h2 style="margin-top:1.5rem">Empresa</h2><ul><li><a href="{ctx.a("proyectos")}">Proyectos</a></li><li><a href="{ctx.a("sobre-nosotros")}">Sobre nosotros</a></li></ul></div>
     </div>
     <div class="pie__legal">
-      <span>© {ANIO} {esc(E["nombre"])}</span>
+      <span>© {ANIO} {esc(E["nombre"])} · Web creada por Ángel Peralta Barba</span>
       <span><a href="{ctx.a("aviso-legal")}">Aviso legal</a> &nbsp; <a href="{ctx.a("privacidad")}">Privacidad</a> &nbsp; <a href="{ctx.a("cookies")}">Cookies</a></span>
     </div>
   </div>
