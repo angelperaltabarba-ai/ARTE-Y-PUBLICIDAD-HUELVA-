@@ -33,7 +33,8 @@ EMPRESA = {
     "nif": "44200124N",
     "domicilio_social": "C/ Palos de la Frontera nº21 entreplanta nº1, 21003 Huelva",
     "registro": None,          # datos registrales, si los hay
-    "desde": 2010,             # año de inicio en el sector
+    "desde": 2010,             # año de inicio de la empresa
+    "experiencia": "más de 20 años",  # experiencia en el oficio
     "alcance": "toda España",
 }
 
@@ -728,5 +729,15 @@ SERVICIOS = [
 _mc = TRABAJOS["marketing-creatividad"]
 TRABAJOS["diseno-web-redes"] = [f for f in _mc if f["src"].endswith(("-01.jpg", "-03.jpg"))]
 TRABAJOS["marketing-creatividad"] = [f for f in _mc if not f["src"].endswith(("-01.jpg", "-03.jpg"))]
+
+# Trabajos destacados en la página de inicio: (servicio, archivo). El primero sale en grande.
+DESTACADOS = [
+    ("rotulacion", "rotulacion-05"),
+    ("rotulacion", "rotulacion-09"),
+    ("publicidad-exterior", "publicidad-exterior-01"),
+    ("gran-formato", "gran-formato-01"),
+    ("imprenta", "imprenta-01"),
+    ("mascotas-corporeos", "mascotas-corporeos-01"),
+]
 
 SERV = {s["slug"]: s for s in SERVICIOS}

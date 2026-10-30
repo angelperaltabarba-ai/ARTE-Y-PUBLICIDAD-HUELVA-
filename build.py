@@ -366,11 +366,25 @@ def pagina_inicio():
         proyectos = f'<section class="seccion"><div class="contenedor"><h2>Trabajos recientes</h2>{lista_proyectos(ctx, C.PROYECTOS[:3])}<p style="margin-top:2rem"><a href="{ctx.a("proyectos")}">Ver todos los proyectos</a></p></div></section>'
     elif C.BORRADOR and not C.TRABAJOS:
         proyectos = f'<section class="seccion" style="padding-block:0 var(--s5)"><div class="contenedor">{pendiente_bloque("trabajos destacados", "Esta sección aparecerá en la portada en cuanto haya fotografías de trabajos reales autorizados (ver PROYECTOS en contenido.py).")}</div></section>'
+    destacados = ""
+    fotos = {f["src"].rsplit("/", 1)[-1][:-4]: f for v in C.TRABAJOS.values() for f in v}
+    items = []
+    for i, (serv, clave) in enumerate(getattr(C, "DESTACADOS", [])):
+        f = fotos.get(clave)
+        if not f: continue
+        items.append(f'''<li class="destacado{" destacado--grande" if i == 0 else ""}"><a href="{ctx.a(serv)}">
+  <span class="destacado__foto"><img src="{ctx.recurso(f["src"])}" alt="{esc(f["alt"])}" width="{f["w"]}" height="{f["h"]}" loading="lazy" decoding="async"></span>
+  <span class="destacado__texto"><strong>{esc(f["pie"])}</strong><span>{esc(C.SERV[serv]["nav"])}</span></span></a></li>''')
+    if items:
+        destacados = f'''<section class="seccion seccion--trabajos" aria-labelledby="trabajos-t"><div class="contenedor">
+  <div class="cabecera-seccion"><h2 id="trabajos-t">Trabajos realizados</h2><a href="{ctx.a("proyectos")}">Ver todos los proyectos</a></div>
+  <ul class="destacados">{"".join(items)}</ul>
+</div></section>'''
     publico = "".join(f"<li>{p}</li>" for p in ["Empresas", "Comercios", "Asociaciones", "Entidades deportivas", "Organizaciones e instituciones", "Particulares"])
     cuerpo = f'''<section class="portada sobre-azul" aria-labelledby="portada-t">
   <div class="contenedor portada__texto">
     <h1 id="portada-t">Imprenta, rotulación, diseño y publicidad desde Huelva para toda España</h1>
-    <p class="entrada">Desde {E["desde"]} pensamos la idea, producimos las piezas y coordinamos la campaña: de una tarjeta de visita a una valla publicitaria, pasando por la fachada de tu negocio, tu web o la mascota de tu club.</p>
+    <p class="entrada">Con {E["experiencia"]} de experiencia y como empresa desde {E["desde"]}, pensamos la idea, producimos las piezas y coordinamos la campaña: de una tarjeta de visita a una valla publicitaria, pasando por la fachada de tu negocio, tu web o la mascota de tu club.</p>
     <div class="acciones">
       <a class="boton boton--claro" href="{ctx.a("contacto")}">Pedir presupuesto</a>
       <a class="boton boton--borde" href="#servicios">Ver servicios</a>
@@ -386,6 +400,8 @@ def pagina_inicio():
     <div class="familias">{fams}</div>
   </div>
 </section>
+
+{destacados}
 
 <section class="seccion seccion--suave" aria-labelledby="modo-t">
   <div class="contenedor">
@@ -465,12 +481,12 @@ def pagina_sobre():
     areas = "".join(f"<li>{a.capitalize()}</li>" for a in C.AREAS_ROTULO)
     cuerpo = f'''{migas(ctx, [("Inicio", ""), ("Sobre nosotros", "sobre-nosotros")])}
 <section class="cabeza sobre-azul"><div class="contenedor"><h1>Sobre Arte &amp; Publicidad</h1>
-<p class="entrada">En el sector desde {E["desde"]}. Desde Huelva, para clientes de toda España.</p></div></section>
+<p class="entrada">{E["experiencia"].capitalize()} de experiencia en el sector y empresa desde {E["desde"]}. Desde Huelva, para clientes de toda España.</p></div></section>
 <section class="seccion"><div class="contenedor dos">
   <div><h2>Qué somos</h2></div>
   <div>
     <p>Arte &amp; Publicidad trabaja en publicidad, impresión, decoración, eventos, web y redes sociales. Ayudamos a empresas, comercios, asociaciones, entidades deportivas y organizaciones a comunicar lo que hacen, desde una pieza impresa hasta una campaña en varios medios.</p>
-    <p>Llevamos en el sector desde {E["desde"]}. En este tiempo hemos rotulado fachadas y vehículos, impreso todo tipo de material y creado campañas, logotipos y mascotas para clientes de Huelva y del resto de España.</p>
+    <p>Llevamos {E["experiencia"]} en el oficio y trabajamos como empresa desde {E["desde"]}. En este tiempo hemos rotulado fachadas y vehículos, impreso todo tipo de material y creado campañas, logotipos y mascotas para clientes de Huelva y del resto de España.</p>
     <ul class="publico">{areas}</ul>
   </div>
 </div></section>

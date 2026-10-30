@@ -304,3 +304,53 @@ ul{padding-left:1.1em}
 .visor button{position:fixed;top:1rem;right:1rem;min-height:44px;padding:.5rem 1rem;font:700 1rem var(--sans);background:#fff;color:var(--azul);border:0;border-radius:2px;cursor:pointer}
 .galeria__item--completa .galeria__abrir{background:#F3F6FA}
 .galeria__item--completa img{object-fit:contain;padding:var(--s2)}
+
+/* ---------- Trabajos destacados (portada) ---------- */
+.seccion--trabajos{background:var(--azul-hondo);color:#fff}
+.seccion--trabajos h2{color:#fff;margin:0}
+.cabecera-seccion{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:var(--s2);margin-bottom:var(--s4)}
+.seccion--trabajos .cabecera-seccion a{color:#fff;font-weight:700}
+.destacados{list-style:none;margin:0;padding:0;display:grid;gap:var(--s2);grid-template-columns:1fr}
+@media (min-width:640px){.destacados{grid-template-columns:repeat(2,1fr)}.destacado--grande{grid-column:1/-1}}
+@media (min-width:1000px){.destacados{grid-template-columns:repeat(3,1fr)}.destacado--grande{grid-column:span 2;grid-row:span 2}}
+.destacado a{display:flex;flex-direction:column;height:100%;color:#fff;text-decoration:none;background:rgba(255,255,255,.04)}
+.destacado__foto{display:block;overflow:hidden;flex:1;min-height:0}
+.destacado__foto img{width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.destacado--grande .destacado__foto img{aspect-ratio:auto;min-height:100%}
+.destacado a:hover img{transform:scale(1.04)}
+.destacado__texto{display:block;padding:.8rem 0 .2rem}
+.destacado__texto strong{display:block;font:600 1.0625rem/1.3 var(--serif)}
+.destacado__texto span{display:block;font-size:.95rem;color:#B9CBE4;margin-top:.15rem}
+.destacado a:hover strong{text-decoration:underline;text-underline-offset:.18em}
+.destacado a:focus-visible{outline-offset:4px}
+
+/* ---------- Animaciones ---------- */
+/* Fundido entre páginas (navegadores compatibles; el resto navega normal) */
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:fundido-salida .25s ease both}
+::view-transition-new(root){animation:fundido-entrada .35s ease both}
+@keyframes fundido-salida{to{opacity:0}}
+@keyframes fundido-entrada{from{opacity:0}}
+
+/* Aparición suave de los bloques al hacer scroll. Solo se activa con JS (.anim en <html>),
+   así que sin JS todo se ve igual que siempre. */
+.anim .revelar{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--retraso,0s)}
+.anim .revelar.visible{opacity:1;transform:none}
+
+/* Entrada de la portada: el texto aparece antes que la firma */
+@media (prefers-reduced-motion:no-preference){
+  .portada__texto>*{animation:aparecer .8s cubic-bezier(.2,.7,.2,1) both}
+  .portada__texto>*:nth-child(2){animation-delay:.08s}
+  .portada__texto>*:nth-child(3){animation-delay:.16s}
+  .portada__firma span{animation-delay:.25s}
+  .portada__firma span:nth-child(2){animation-delay:.33s}
+  .portada__firma span:nth-child(3){animation-delay:.41s}
+}
+@keyframes aparecer{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.boton{transition:background-color .2s,color .2s,border-color .2s,transform .2s}
+.boton:active{transform:translateY(1px)}
+
+@media (prefers-reduced-motion:reduce){
+  @view-transition{navigation:none}
+  .anim .revelar{opacity:1;transform:none;transition:none}
+}

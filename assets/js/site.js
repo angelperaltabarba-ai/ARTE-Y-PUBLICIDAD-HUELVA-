@@ -37,6 +37,45 @@
     });
   }
 
+  /* ---------- Aparición suave al hacer scroll ---------- */
+  var reducido = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reducido && "IntersectionObserver" in window) {
+    var selector = "main h2, .entrada, .familia, .uso, .pasos li, .publico, .galeria__item, .destacado, " +
+                   ".relacionados li, .aviso, .terminos > div, .proyecto, .cierre__rejilla, .datos, .formulario";
+    var elementos = Array.prototype.filter.call(document.querySelectorAll(selector), function (el) {
+      // Lo que ya se ve al cargar no se anima, para que la página no aparezca vacía
+      return !el.closest(".portada") && el.getBoundingClientRect().top > window.innerHeight * 0.92;
+    });
+    if (elementos.length) {
+      document.documentElement.classList.add("anim");
+      var obs = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          e.target.classList.add("visible");
+          obs.unobserve(e.target);
+        });
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+      elementos.forEach(function (el) {
+        // Escalonar elementos hermanos de una misma rejilla
+        var hermanos = el.parentNode ? Array.prototype.indexOf.call(el.parentNode.children, el) : 0;
+        if (el.matches(".familia, .uso, .pasos li, .galeria__item, .destacado, .relacionados li, .terminos > div, .proyecto")) {
+          el.style.setProperty("--retraso", (Math.min(hermanos, 5) * 0.07) + "s");
+        }
+        el.classList.add("revelar");
+        obs.observe(el);
+      });
+      // Red de seguridad: si algo no llega a activarse, se muestra igualmente
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          elementos.forEach(function (el) {
+            var r = el.getBoundingClientRect();
+            if (r.top < window.innerHeight && r.bottom > 0) el.classList.add("visible");
+          });
+        }, 1200);
+      });
+    }
+  }
+
   /* ---------- Visor de fotos de trabajos ---------- */
   var enlaces = document.querySelectorAll(".galeria__abrir");
   if (enlaces.length && typeof HTMLDialogElement === "function") {
