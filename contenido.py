@@ -14,7 +14,7 @@ BORRADOR = False
 
 # Dominio definitivo (sin barra final). Se usa en canonical, sitemap y Open Graph.
 # Se puede sobrescribir con la variable de entorno SITE_URL en Netlify.
-SITE_URL = "https://arteypublicidadhuelva.netlify.app"  # PROVISIONAL: sustituir por el dominio real
+SITE_URL = "https://arteypublicidadhuelva.es"  # dominio definitivo
 
 EMPRESA = {
     "nombre": "Arte y Publicidad Huelva",
