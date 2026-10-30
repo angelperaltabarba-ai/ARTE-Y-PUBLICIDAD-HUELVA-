@@ -730,14 +730,723 @@ _mc = TRABAJOS["marketing-creatividad"]
 TRABAJOS["diseno-web-redes"] = [f for f in _mc if f["src"].endswith(("-01.jpg", "-03.jpg"))]
 TRABAJOS["marketing-creatividad"] = [f for f in _mc if not f["src"].endswith(("-01.jpg", "-03.jpg"))]
 
+
+# ---------------------------------------------------------------------------
+# Fotos añadidas desde el Facebook de la empresa (octubre 2026)
+for _slug, _fotos in {
+ "rotulacion": [
+  {
+   "src": "assets/img/trabajos/rotulacion-14.jpg",
+   "w": 1600,
+   "h": 1200,
+   "pie": "Fachada y escaparate para una peluquería",
+   "alt": "Fachada de peluquería con rótulo blanco y vinilo en el escaparate",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-15.jpg",
+   "w": 1600,
+   "h": 1200,
+   "pie": "Fachada rotulada para una clínica veterinaria",
+   "alt": "Entrada de clínica veterinaria con rótulo azul y vinilos de gato y perro",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-16.jpg",
+   "w": 1600,
+   "h": 974,
+   "pie": "Rotulación de vehículo para unos apartamentos turísticos",
+   "alt": "Coche blanco rotulado con logotipo y líneas cobrizas",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-17.jpg",
+   "w": 1600,
+   "h": 1200,
+   "pie": "Rótulo de fachada para una tienda de pinturas",
+   "alt": "Fachada gris con rótulo azul y blanco sobre la entrada",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-20.jpg",
+   "w": 1280,
+   "h": 853,
+   "pie": "Rótulo para un centro de formación",
+   "alt": "Fachada de piedra con rótulo de centro de formación y logotipo rojo",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-21.jpg",
+   "w": 1440,
+   "h": 810,
+   "pie": "Rótulo y banderola para un centro de estética",
+   "alt": "Fachada de ladrillo con rótulo y banderola de centro de estética",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-23.jpg",
+   "w": 1600,
+   "h": 900,
+   "pie": "Letras en relieve para un bar de vinos y tapas",
+   "alt": "Fachada de bar con letras doradas en relieve",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-24.jpg",
+   "w": 1600,
+   "h": 1200,
+   "pie": "Rotulación de coche de empresa",
+   "alt": "Coche rojo con los datos de la empresa en la luneta trasera",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-26.jpg",
+   "w": 1600,
+   "h": 1200,
+   "pie": "Rotulación de furgoneta para una cervecería",
+   "alt": "Furgoneta blanca rotulada con texto azul caligráfico",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-27.jpg",
+   "w": 1600,
+   "h": 1200,
+   "pie": "Fachada para una peluquería",
+   "alt": "Fachada gris con rótulo de peluquería y toldo blanco",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-30.jpg",
+   "w": 960,
+   "h": 528,
+   "pie": "Rotulación de furgoneta para una empresa de reciclaje de aceite",
+   "alt": "Furgoneta blanca rotulada en verde con datos de contacto",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-33.jpg",
+   "w": 720,
+   "h": 960,
+   "pie": "Rotulación de autobús urbano",
+   "alt": "Parte trasera de un autobús con publicidad rotulada",
+   "completa": False,
+   "cliente": None
+  }
+ ],
+ "diseno-web-redes": [
+  {
+   "src": "assets/img/trabajos/diseno-web-redes-01.jpg",
+   "w": 1132,
+   "h": 1600,
+   "pie": "Cartel para un festival flamenco",
+   "alt": "Cartel de festival flamenco con una guitarra frente al mar al atardecer",
+   "completa": True,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/diseno-web-redes-02.jpg",
+   "w": 1014,
+   "h": 543,
+   "pie": "Logotipo para una asociación",
+   "alt": "Logotipo de una casa con un corazón sobre fondo turquesa",
+   "completa": True,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/diseno-web-redes-03.jpg",
+   "w": 1600,
+   "h": 1530,
+   "pie": "Guía ilustrada de orientación profesional",
+   "alt": "Póster con una infografía de colores sobre orientación y empleo",
+   "completa": False,
+   "cliente": None
+  }
+ ],
+ "marketing-creatividad": [
+  {
+   "src": "assets/img/trabajos/marketing-creatividad-05.jpg",
+   "w": 946,
+   "h": 527,
+   "pie": "Ilustración para la campaña de una asociación",
+   "alt": "Ilustración de una madre abrazando a un niño",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/marketing-creatividad-06.jpg",
+   "w": 1440,
+   "h": 1032,
+   "pie": "Concepto creativo para una propuesta",
+   "alt": "Bolas de papel arrugado junto a una bombilla dibujada con una bola roja",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/marketing-creatividad-07.jpg",
+   "w": 960,
+   "h": 960,
+   "pie": "Imagen tematizada para una sala de escape",
+   "alt": "Fachada de una sala de escape con gráficas de temática histórica",
+   "completa": False,
+   "cliente": None
+  }
+ ],
+ "campanas": [
+  {
+   "src": "assets/img/trabajos/campanas-01.jpg",
+   "w": 960,
+   "h": 505,
+   "pie": "Cartel para un festival de música de verano",
+   "alt": "Cartel colorido con las palabras Hello Summer y Music Festival",
+   "completa": True,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/campanas-02.jpg",
+   "w": 781,
+   "h": 960,
+   "pie": "Escaparate para una campaña de Black Friday",
+   "alt": "Escaparate de una tienda con vinilo de Black Friday hasta el 70 %",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/campanas-03.jpg",
+   "w": 1600,
+   "h": 950,
+   "pie": "Cartel para una agrupación de carnaval",
+   "alt": "Cartel con un personaje de carnaval entre cadenas",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/campanas-04.jpg",
+   "w": 720,
+   "h": 960,
+   "pie": "Cartel de inauguración de un pub",
+   "alt": "Cartel negro que anuncia la gran inauguración de un pub",
+   "completa": True,
+   "cliente": None
+  }
+ ],
+ "mascotas-corporeos": [
+  {
+   "src": "assets/img/trabajos/mascotas-corporeos-05.jpg",
+   "w": 960,
+   "h": 720,
+   "pie": "Letras corpóreas para un salón de manicura",
+   "alt": "Logotipo en relieve turquesa y negro en una pared blanca",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/mascotas-corporeos-06.jpg",
+   "w": 960,
+   "h": 960,
+   "pie": "Logotipo corpóreo para un 50 aniversario",
+   "alt": "Número 50 y escudo en relieve negro sobre una pared",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/mascotas-corporeos-07.jpg",
+   "w": 1600,
+   "h": 1261,
+   "pie": "Letras corpóreas para una tienda",
+   "alt": "Palabra Outlet en letras de relieve sobre una pared blanca",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/mascotas-corporeos-09.jpg",
+   "w": 720,
+   "h": 960,
+   "pie": "Disfraz de mascota de una ardilla",
+   "alt": "Persona con un disfraz de ardilla de cuerpo entero",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/mascotas-corporeos-10.jpg",
+   "w": 720,
+   "h": 960,
+   "pie": "Mascota para una marca de aceite",
+   "alt": "Disfraz con forma de botella de aceite junto a un camión",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/mascotas-corporeos-11.jpg",
+   "w": 720,
+   "h": 960,
+   "pie": "Disfraz de insecto con armadura",
+   "alt": "Disfraz de insecto con armadura en el taller",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/mascotas-corporeos-12.jpg",
+   "w": 960,
+   "h": 1280,
+   "pie": "Cabeza de mascota con forma de llama",
+   "alt": "Cabeza de mascota amarilla y sonriente",
+   "completa": True,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/mascotas-corporeos-13.jpg",
+   "w": 960,
+   "h": 1280,
+   "pie": "Figura corpórea de una hamburguesa",
+   "alt": "Figura gigante de una hamburguesa sobre un bidón azul",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/mascotas-corporeos-14.jpg",
+   "w": 720,
+   "h": 1280,
+   "pie": "Disfraz de cangrejo de río",
+   "alt": "Disfraz de cangrejo rojo de cuerpo entero",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/mascotas-corporeos-15.jpg",
+   "w": 792,
+   "h": 960,
+   "pie": "Cabeza de mascota de ardilla",
+   "alt": "Cabeza de mascota de ardilla con una chapa",
+   "completa": True,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/mascotas-corporeos-16.jpg",
+   "w": 960,
+   "h": 720,
+   "pie": "Figura corpórea de un burro",
+   "alt": "Figura de un burro a tamaño real en el taller",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/mascotas-corporeos-17.jpg",
+   "w": 960,
+   "h": 1280,
+   "pie": "Figura navideña de un chihuahua",
+   "alt": "Figura grande de un chihuahua con gorro de Papá Noel",
+   "completa": False,
+   "cliente": None
+  }
+ ],
+ "publicidad-exterior": [
+  {
+   "src": "assets/img/trabajos/publicidad-exterior-04.jpg",
+   "w": 960,
+   "h": 720,
+   "pie": "Valla publicitaria junto a un parque",
+   "alt": "Valla de una promoción de viviendas entre árboles",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/publicidad-exterior-05.jpg",
+   "w": 960,
+   "h": 720,
+   "pie": "Valla de una promoción de viviendas",
+   "alt": "Valla con anuncio de pisos y precios en una zona verde",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/publicidad-exterior-06.jpg",
+   "w": 1440,
+   "h": 1080,
+   "pie": "Valla de obra en un solar en construcción",
+   "alt": "Valla amarilla de una promoción de viviendas junto a una grúa",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/publicidad-exterior-07.jpg",
+   "w": 540,
+   "h": 960,
+   "pie": "Lona publicitaria en la fachada de un edificio",
+   "alt": "Instalación de una lona vertical en la fachada de un edificio",
+   "completa": False,
+   "cliente": None
+  }
+ ],
+ "gran-formato": [
+  {
+   "src": "assets/img/trabajos/gran-formato-05.jpg",
+   "w": 960,
+   "h": 662,
+   "pie": "Mural fotográfico para una cafetería",
+   "alt": "Pared con un mural de café sobre la barra de una cafetería",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/gran-formato-06.jpg",
+   "w": 1126,
+   "h": 235,
+   "pie": "Lona publicitaria para una agencia de viajes",
+   "alt": "Lona alargada azul con un autobús, un barco y el nombre de una agencia de viajes",
+   "completa": True,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/gran-formato-07.jpg",
+   "w": 1599,
+   "h": 1200,
+   "pie": "Vallado de obra decorado con un paisaje costero",
+   "alt": "Vallado metálico cubierto con una lona ilustrada de playa y barcos",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/gran-formato-08.jpg",
+   "w": 1600,
+   "h": 845,
+   "pie": "Mural infantil para una zona de juegos",
+   "alt": "Mural de animales de la selva en una pared amarilla",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/gran-formato-10.jpg",
+   "w": 960,
+   "h": 720,
+   "pie": "Fotomural de paisaje para un restaurante",
+   "alt": "Comedor con un mural fotográfico de montañas en la pared",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/gran-formato-11.jpg",
+   "w": 960,
+   "h": 540,
+   "pie": "Fotomural en blanco y negro para un bar",
+   "alt": "Pared con una fotografía histórica en blanco y negro",
+   "completa": False,
+   "cliente": None
+  }
+ ],
+ "merchandising": [
+  {
+   "src": "assets/img/trabajos/merchandising-07.jpg",
+   "w": 748,
+   "h": 1176,
+   "pie": "Llavero personalizado",
+   "alt": "Mano sujetando una llave con un llavero personalizado",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/merchandising-08.jpg",
+   "w": 898,
+   "h": 1600,
+   "pie": "Logotipo bordado para una cafetería",
+   "alt": "Bordado de un pájaro de dibujo con el nombre de una cafetería",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/merchandising-09.jpg",
+   "w": 897,
+   "h": 496,
+   "pie": "Logotipo bordado para una heladería",
+   "alt": "Bordado con texto rosa sobre tela morada",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/merchandising-10.jpg",
+   "w": 701,
+   "h": 756,
+   "pie": "Escudo bordado para una hermandad",
+   "alt": "Bordado de una custodia con ramas de olivo sobre tela granate",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/merchandising-11.jpg",
+   "w": 1600,
+   "h": 759,
+   "pie": "Camisetas personalizadas con logotipo",
+   "alt": "Camiseta azul marino con logotipo delante y datos detrás",
+   "completa": True,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/merchandising-12.jpg",
+   "w": 1280,
+   "h": 720,
+   "pie": "Bordado de un logotipo a máquina",
+   "alt": "Máquina de bordar cosiendo un logotipo en una prenda",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/merchandising-13.jpg",
+   "w": 960,
+   "h": 560,
+   "pie": "Cintas personalizadas con los colores de la bandera",
+   "alt": "Dos cintas rojas y amarillas con texto impreso",
+   "completa": True,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/merchandising-14.jpg",
+   "w": 528,
+   "h": 960,
+   "pie": "Polos bordados en varios colores",
+   "alt": "Polos de colores con un pequeño logotipo bordado",
+   "completa": False,
+   "cliente": None
+  }
+ ],
+ "imprenta": [
+  {
+   "src": "assets/img/trabajos/imprenta-05.jpg",
+   "w": 1600,
+   "h": 1200,
+   "pie": "Cartel de venta y alquiler para un local",
+   "alt": "Cartel naranja de se vende y se alquila en el escaparate de un local",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/imprenta-06.jpg",
+   "w": 1600,
+   "h": 1040,
+   "pie": "Calendario de pared personalizado",
+   "alt": "Calendario de espiral abierto con páginas amarillas y verdes",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/imprenta-07.jpg",
+   "w": 1600,
+   "h": 1200,
+   "pie": "Tarjetas de visita para una heladería",
+   "alt": "Tarjetas de visita rosas con el logotipo de una heladería",
+   "completa": False,
+   "cliente": None
+  }
+ ]
+}.items():
+    TRABAJOS.setdefault(_slug, []).extend(_fotos)
+
+# Trabajos que solo aparecen en la página Proyectos (no se repiten en ningún otro sitio)
+PROYECTOS_EXTRA = {
+ "rotulacion": [
+  {
+   "src": "assets/img/trabajos/rotulacion-18.jpg",
+   "w": 941,
+   "h": 941,
+   "pie": "Letras en relieve para un bar",
+   "alt": "Pared con el nombre de un bar en letras marrones de relieve",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-19.jpg",
+   "w": 960,
+   "h": 720,
+   "pie": "Frontal de barra decorado",
+   "alt": "Frontal de barra de madera con un panel impreso",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-22.jpg",
+   "w": 1600,
+   "h": 757,
+   "pie": "Rotulación de camión de residuos",
+   "alt": "Trasera de un camión blanco rotulado",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-25.jpg",
+   "w": 1600,
+   "h": 1200,
+   "pie": "Rótulo para un comercio",
+   "alt": "Rótulo azul sobre la entrada de un comercio",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-28.jpg",
+   "w": 960,
+   "h": 720,
+   "pie": "Rotulación de fachada para un bazar",
+   "alt": "Fachada de ladrillo con rótulo naranja y escaparates",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-29.jpg",
+   "w": 1440,
+   "h": 1206,
+   "pie": "Lona decorativa para un café bar",
+   "alt": "Lona decorada en la cristalera de un café bar",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-31.jpg",
+   "w": 960,
+   "h": 540,
+   "pie": "Rotulación de coche para servicios técnicos",
+   "alt": "Coche blanco rotulado con la mascota de un fontanero",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-32.jpg",
+   "w": 960,
+   "h": 720,
+   "pie": "Mesa personalizada para una heladería",
+   "alt": "Tablero rosa impreso con helados",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-34.jpg",
+   "w": 1040,
+   "h": 585,
+   "pie": "Rótulo para una brasería",
+   "alt": "Fachada blanca con el rótulo de una brasería",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-35.jpg",
+   "w": 528,
+   "h": 960,
+   "pie": "Decoración para una brasería",
+   "alt": "Pared de brasería con el nombre pintado y un panel de azulejos",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-36.jpg",
+   "w": 400,
+   "h": 300,
+   "pie": "Escaparate con pieza escultórica",
+   "alt": "Escaparate con una lata de pintura naranja derramándose",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-37.jpg",
+   "w": 798,
+   "h": 537,
+   "pie": "Escaparate decorado para una tienda de moda",
+   "alt": "Escaparate con caballos lilas en vinilo y maniquíes",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-38.jpg",
+   "w": 960,
+   "h": 540,
+   "pie": "Decoración interior para una tienda de moda",
+   "alt": "Interior de tienda con logotipo en la pared y percheros",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/rotulacion-39.jpg",
+   "w": 960,
+   "h": 540,
+   "pie": "Fachada para una tienda de moda",
+   "alt": "Fachada de tienda con letras en relieve y escaparates",
+   "completa": False,
+   "cliente": None
+  }
+ ],
+ "gran-formato": [
+  {
+   "src": "assets/img/trabajos/gran-formato-09.jpg",
+   "w": 1600,
+   "h": 900,
+   "pie": "Lona infantil para unos apartamentos",
+   "alt": "Lona con dibujos de animales en una sala",
+   "completa": False,
+   "cliente": None
+  }
+ ],
+ "mascotas-corporeos": [
+  {
+   "src": "assets/img/trabajos/mascotas-corporeos-08.jpg",
+   "w": 1600,
+   "h": 810,
+   "pie": "Letras corpóreas doradas para una tienda",
+   "alt": "Nombre de tienda en letras doradas sobre una pared blanca",
+   "completa": False,
+   "cliente": None
+  },
+  {
+   "src": "assets/img/trabajos/mascotas-corporeos-18.jpg",
+   "w": 528,
+   "h": 960,
+   "pie": "Figura corpórea de un personaje con gorra",
+   "alt": "Figura de un personaje con gorra y camiseta en el taller",
+   "completa": False,
+   "cliente": None
+  }
+ ]
+}
+
+# Foto de la página Sobre nosotros
+FOTO_SOBRE = {
+ "src": "assets/img/trabajos/taller-01.jpg",
+ "w": 720,
+ "h": 960,
+ "pie": "En el taller, preparando una figura corpórea",
+ "alt": "Persona trabajando en una figura blanca de gran tamaño en el taller",
+ "completa": False,
+ "cliente": None
+}
+
+# Foto grande en la cabecera de cada servicio (clave = nombre de archivo sin .jpg).
+# Sale solo ahí: se excluye de la galería del servicio.
+PORTADAS = {
+    "imprenta": "imprenta-01",
+    "merchandising": "merchandising-12",
+    "rotulacion": "rotulacion-14",
+    "gran-formato": "gran-formato-08",
+    "publicidad-exterior": "publicidad-exterior-03",
+    "campanas": "campanas-01",
+    "marketing-creatividad": "marketing-creatividad-05",
+    "diseno-web-redes": "marketing-creatividad-03",
+    "mascotas-corporeos": "mascotas-corporeos-06",
+}
+
 # Trabajos destacados en la página de inicio: (servicio, archivo). El primero sale en grande.
+# Salen solo en la portada: se excluyen de la galería del servicio.
 DESTACADOS = [
     ("rotulacion", "rotulacion-05"),
     ("rotulacion", "rotulacion-09"),
     ("publicidad-exterior", "publicidad-exterior-01"),
     ("gran-formato", "gran-formato-01"),
-    ("imprenta", "imprenta-01"),
-    ("mascotas-corporeos", "mascotas-corporeos-01"),
+    ("mascotas-corporeos", "mascotas-corporeos-17"),
+    ("imprenta", "imprenta-07"),
 ]
 
 SERV = {s["slug"]: s for s in SERVICIOS}

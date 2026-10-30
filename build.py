@@ -265,16 +265,42 @@ def migas(ctx, items):
         for i, (n, r) in enumerate(items))
     return f'<nav class="migas contenedor" aria-label="Estás en"><ol>{lis}</ol></nav>'
 
-def galeria(s, ctx):
-    fotos = C.TRABAJOS.get(s["slug"], [])
+# ---------------------------------------------------------------- reparto de fotos (sin repeticiones)
+def clave(f): return f["src"].rsplit("/", 1)[-1].rsplit(".", 1)[0]
+DEST = {k for _, k in getattr(C, "DESTACADOS", [])}
+PORT = set(getattr(C, "PORTADAS", {}).values())
+
+def foto_portada(slug):
+    k = getattr(C, "PORTADAS", {}).get(slug)
+    return next((f for f in C.TRABAJOS.get(slug, []) if clave(f) == k), None)
+
+def fotos_galeria(slug):
+    return [f for f in C.TRABAJOS.get(slug, []) if clave(f) not in DEST | PORT]
+
+def comprobar_repetidas():
+    usadas = [clave(f) for v in C.TRABAJOS.values() for f in v] + \
+             [clave(f) for v in getattr(C, "PROYECTOS_EXTRA", {}).values() for f in v] + \
+             ([clave(C.FOTO_SOBRE)] if getattr(C, "FOTO_SOBRE", None) else [])
+    dup = {k for k in usadas if usadas.count(k) > 1}
+    assert not dup, f"Fotos repetidas: {sorted(dup)}"
+    assert not (DEST & PORT), f"Foto destacada y de portada a la vez: {sorted(DEST & PORT)}"
+    assert len(DEST) == len(getattr(C, "DESTACADOS", [])), "Foto destacada repetida"
+    for slug, k in getattr(C, "PORTADAS", {}).items():
+        assert k in {clave(f) for f in C.TRABAJOS.get(slug, [])}, f"La portada {k} no pertenece a {slug}"
+    todas = set(usadas)
+    falta = (DEST | PORT) - todas
+    assert not falta, f"Fotos destacadas o de portada que no existen: {sorted(falta)}"
+
+def item_galeria(f, ctx):
+    cli = f'<span class="galeria__cliente">{esc(f["cliente"])}</span>' if f.get("cliente") else ""
+    clase = ' galeria__item--completa' if f.get("completa") else ""
+    return f'<figure class="galeria__item{clase}"><a href="{ctx.recurso(f["src"])}" class="galeria__abrir" aria-label="Ampliar: {esc(f["pie"])}"><img src="{ctx.recurso(f["src"])}" alt="{esc(f["alt"])}" width="{f["w"]}" height="{f["h"]}" loading="lazy" decoding="async"></a><figcaption>{esc(f["pie"])}{cli}</figcaption></figure>'
+
+def galeria(s, ctx, fotos=None):
+    fotos = fotos_galeria(s["slug"]) if fotos is None else fotos
     if not fotos:
         return "<p>Aquí mostraremos ejemplos reales de este servicio.</p>" + huecos(s["huecos"], ctx)
-    items = []
-    for i, f in enumerate(fotos):
-        cli = f'<span class="galeria__cliente">{esc(f["cliente"])}</span>' if f.get("cliente") else ""
-        carga = 'loading="lazy" decoding="async"'
-        clase = ' galeria__item--completa' if f.get("completa") else ""
-        items.append(f'<figure class="galeria__item{clase}"><a href="{ctx.recurso(f["src"])}" class="galeria__abrir" aria-label="Ampliar: {esc(f["pie"])}"><img src="{ctx.recurso(f["src"])}" alt="{esc(f["alt"])}" width="{f["w"]}" height="{f["h"]}" {carga}></a><figcaption>{esc(f["pie"])}{cli}</figcaption></figure>')
+    items = [item_galeria(f, ctx) for f in fotos]
     return f'<p>Algunos trabajos reales de este servicio. Pulsa una foto para verla en grande.</p><div class="galeria galeria--{min(len(fotos),3)}">' + "".join(items) + "</div>"
 
 def huecos(lista, ctx):
@@ -300,6 +326,10 @@ def pagina_servicio(s):
     <div class="cabeza__aparte">{aparte}</div>
   </div>
 </section>''')
+    fp = foto_portada(s["slug"])
+    if fp:
+        partes[-1] = partes[-1].replace('<section class="cabeza sobre-azul">', '<section class="cabeza cabeza--con-foto sobre-azul">', 1)
+        partes.append(f'''<figure class="foto-servicio contenedor"><img src="{ctx.recurso(fp["src"])}" alt="{esc(fp["alt"])}" width="{fp["w"]}" height="{fp["h"]}" fetchpriority="high"><figcaption>{esc(fp["pie"])}</figcaption></figure>''')
     necesidad = "".join(f"<p>{L(p)}</p>" for p in s["necesidad"])
     partes.append(f'''<section class="seccion"><div class="contenedor dos">
   <div><h2>{esc(s["necesidad_h2"])}</h2></div><div>{necesidad}</div>
@@ -451,10 +481,16 @@ def pagina_proyectos():
     ctx = Ctx("proyectos")
     if C.TRABAJOS:
         bloques = []
+        extra = getattr(C, "PROYECTOS_EXTRA", {})
         for s in C.SERVICIOS:
-            if C.TRABAJOS.get(s["slug"]):
-                bloques.append(f'<section style="margin-bottom:var(--s5)"><h2>{esc(s["nav"])}</h2>{galeria(s, ctx)}<p style="margin-top:1rem"><a href="{ctx.a(s["slug"])}">Ver el servicio de {esc(s["nav"].lower())}</a></p></section>')
-        contenido = "".join(bloques)
+            fx = extra.get(s["slug"], [])
+            n = len(fotos_galeria(s["slug"]))
+            enlace = f'<a href="{ctx.a(s["slug"])}">Ver {n} trabajos más en {esc(s["nav"].lower())}</a>' if n else ""
+            if fx:
+                bloques.append(f'<section class="bloque-proyectos"><h2>{esc(s["nav"])}</h2><div class="galeria galeria--{min(len(fx),3)}">{"".join(item_galeria(f, ctx) for f in fx)}</div><p class="bloque-proyectos__mas">{enlace}</p></section>')
+        contenido = "<p class=\"entrada\">Una selección de trabajos que no aparecen en las páginas de cada servicio. Pulsa una foto para verla en grande.</p>" + "".join(bloques) if bloques else ""
+        if not bloques:
+            contenido = '<ul class="relacionados">' + "".join(f'<li><a href="{ctx.a(s["slug"])}"><strong>{esc(s["nav"])}</strong><span>{len(C.TRABAJOS.get(s["slug"], []))} trabajos</span></a></li>' for s in C.SERVICIOS if C.TRABAJOS.get(s["slug"])) + "</ul>"
     elif C.PROYECTOS:
         contenido = lista_proyectos(ctx, C.PROYECTOS)
     else:
@@ -479,9 +515,11 @@ def pagina_proyectos():
 def pagina_sobre():
     ctx = Ctx("sobre-nosotros")
     areas = "".join(f"<li>{a.capitalize()}</li>" for a in C.AREAS_ROTULO)
+    fs = getattr(C, "FOTO_SOBRE", None)
     cuerpo = f'''{migas(ctx, [("Inicio", ""), ("Sobre nosotros", "sobre-nosotros")])}
-<section class="cabeza sobre-azul"><div class="contenedor"><h1>Sobre Arte &amp; Publicidad</h1>
+<section class="cabeza{" cabeza--con-foto" if fs else ""} sobre-azul"><div class="contenedor"><h1>Sobre Arte &amp; Publicidad</h1>
 <p class="entrada">{E["experiencia"].capitalize()} de experiencia en el sector y empresa desde {E["desde"]}. Desde Huelva, para clientes de toda España.</p></div></section>
+{f'<figure class="foto-servicio contenedor"><img src="{ctx.recurso(fs["src"])}" alt="{esc(fs["alt"])}" width="{fs["w"]}" height="{fs["h"]}" fetchpriority="high"><figcaption>{esc(fs["pie"])}</figcaption></figure>' if fs else ""}
 <section class="seccion"><div class="contenedor dos">
   <div><h2>Qué somos</h2></div>
   <div>
@@ -648,6 +686,7 @@ def main():
     if os.path.exists(OUT): shutil.rmtree(OUT)
     os.makedirs(OUT)
     shutil.copytree("assets", os.path.join(OUT, "assets"))
+    comprobar_repetidas()
     pagina_inicio()
     for s in C.SERVICIOS: pagina_servicio(s)
     pagina_proyectos(); pagina_sobre(); pagina_contacto()

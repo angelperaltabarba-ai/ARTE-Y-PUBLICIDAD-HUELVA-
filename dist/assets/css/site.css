@@ -354,3 +354,15 @@ ul{padding-left:1.1em}
   @view-transition{navigation:none}
   .anim .revelar{opacity:1;transform:none;transition:none}
 }
+
+/* Foto principal de cada servicio: monta sobre el borde del bloque azul */
+.cabeza--con-foto{padding-bottom:calc(clamp(2.5rem,6vw,4.5rem) + clamp(3rem,8vw,7rem))}
+.foto-servicio{margin:calc(-1 * clamp(3rem,8vw,7rem)) auto 0;position:relative}
+.foto-servicio img{width:100%;aspect-ratio:16/7;object-fit:cover;background:var(--azul-claro)}
+.foto-servicio figcaption{font-size:.95rem;color:var(--gris);margin-top:.6rem}
+@media (max-width:640px){.foto-servicio img{aspect-ratio:4/3}}
+.bloque-proyectos{margin-bottom:var(--s5)}
+.bloque-proyectos__mas{margin-top:var(--s2)}
+/* Una sola foto: no ocupar todo el ancho */
+.galeria--1{max-width:44rem}
+@media (min-width:640px){.galeria--2{max-width:none}}
