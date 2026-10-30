@@ -10,7 +10,7 @@ Mientras BORRADOR = True, la web muestra avisos amarillos donde falta un dato.
 Antes de publicar en el dominio definitivo, completa los datos y pon BORRADOR = False.
 """
 
-BORRADOR = True
+BORRADOR = False
 
 # Dominio definitivo (sin barra final). Se usa en canonical, sitemap y Open Graph.
 # Se puede sobrescribir con la variable de entorno SITE_URL en Netlify.
@@ -24,15 +24,17 @@ EMPRESA = {
     "telefono": "600 33 81 63",
     "whatsapp": "34600338163",
     "email": "arteypublicidad.huelva@gmail.com",
-    "direccion": {"calle": "Calle Palos de la Frontera, 21, entreplanta 1", "cp": "21003", "localidad": "Huelva", "provincia": "Huelva"},
+    "direccion": {"calle": "C/ Palos de la Frontera nº21 entreplanta nº1", "cp": "21003", "localidad": "Huelva", "provincia": "Huelva"},
     "horario": "Lunes a sábado, 09:00–14:00 y 16:30–20:00",
     "mapa_url": "https://www.google.com/maps/search/?api=1&query=Calle+Palos+de+la+Frontera+21+21003+Huelva",
     "redes": {"Instagram": "https://www.instagram.com/chemariquelme/"},
     # --- Datos legales: PENDIENTES ---
-    "razon_social": None,
-    "nif": None,
-    "domicilio_social": None,
+    "razon_social": "José Manuel Rodríguez Riquelme",
+    "nif": "44200124N",
+    "domicilio_social": "C/ Palos de la Frontera nº21 entreplanta nº1, 21003 Huelva",
     "registro": None,          # datos registrales, si los hay
+    "desde": 2010,             # año de inicio en el sector
+    "alcance": "toda España",
 }
 
 # Áreas que la propia empresa muestra en su rótulo corporativo
@@ -487,12 +489,12 @@ SERVICIOS = [
     {
         "slug": "rotulacion",
         "grupo": "espacios",
-        "nav": "Rótulos y decoración de fachadas",
+        "nav": "Rotulación y decoración de negocios",
         "resumen": "Rótulos, fachadas, escaparates, interiores y vehículos.",
         "seo_titulo": "Rotulación comercial y rótulos para negocios en Huelva | Arte y Publicidad",
         "seo_desc": "Rótulos comerciales, decoración de fachadas y gráfica para escaparates y locales en Huelva. Diseñamos la imagen exterior de tu negocio para que se identifique de lejos.",
         "intencion": "rotulación comercial en Huelva / rótulos para negocios",
-        "h1": "Rótulos y decoración de fachadas",
+        "h1": "Rotulación y decoración de negocios",
         "entrada": "La fachada es lo primero que ve un cliente, muchas veces desde la otra acera o desde el coche. Diseñamos rótulos y gráfica para que tu negocio se identifique de lejos y se recuerde de cerca.",
         "aparte": ["<strong>Para</strong> comercios, hostelería, oficinas, clínicas, talleres y nuevas aperturas.",
                    "<strong>Cuéntanos</strong> dónde está el local y, si puedes, envíanos una foto de la fachada."],
@@ -626,12 +628,12 @@ SERVICIOS = [
     {
         "slug": "marketing-creatividad",
         "grupo": "comunicacion",
-        "nav": "Marketing y creatividad",
-        "resumen": "Estrategia, ideas de campaña, propuestas visuales, web y redes sociales.",
+        "nav": "Creatividad y estrategia publicitaria",
+        "resumen": "Ideas de campaña, estrategia de comunicación y conceptos creativos.",
         "seo_titulo": "Marketing, estrategia y creatividad publicitaria en Huelva | Arte y Publicidad",
         "seo_desc": "Convertimos una necesidad comercial en un mensaje claro y una propuesta visual coherente: estrategia, ideas de campaña, identidad, web, redes sociales y eventos.",
         "intencion": "marketing y creatividad publicitaria en Huelva / estrategia de comunicación",
-        "h1": "Marketing, estrategia y creatividad",
+        "h1": "Creatividad y estrategias publicitarias",
         "entrada": "Antes de diseñar una pieza hay que saber qué tiene que conseguir. Te ayudamos a convertir una necesidad comercial en un mensaje claro y en una propuesta visual coherente.",
         "aparte": ["<strong>Para</strong> marcas que empiezan, negocios que quieren renovarse y entidades con un mensaje que transmitir.",
                    "<strong>Cuéntanos</strong> el problema, no solo la pieza: «necesito más clientes en verano» nos dice más que «necesito un cartel»."],
@@ -659,6 +661,35 @@ SERVICIOS = [
         "publico": ["Marcas nuevas", "Negocios que se renuevan", "Asociaciones", "Entidades deportivas", "Instituciones"],
         "huecos": [("marketing-1", "Propuesta visual o identidad desarrollada para un cliente, con autorización")],
         "relacionados": ["campanas", "mascotas-corporeos", "imprenta"],
+    },
+    {
+        "slug": "diseno-web-redes",
+        "grupo": "comunicacion",
+        "nav": "Diseño, webs y redes sociales",
+        "resumen": "Logotipos, identidad visual, páginas web y contenido para redes.",
+        "seo_titulo": "Diseño gráfico, páginas web y redes sociales | Arte y Publicidad Huelva",
+        "seo_desc": "Diseño de logotipos e identidad visual, páginas web para empresas y contenido para redes sociales, con la misma imagen que tus rótulos e impresos.",
+        "intencion": "diseño gráfico en Huelva / diseño web para empresas / redes sociales",
+        "h1": "Diseño, webs y redes sociales",
+        "entrada": "Tu logotipo, tu web y tus redes son lo primero que muchos clientes ven de ti. Los diseñamos para que digan lo mismo que tu fachada, tus impresos y tus campañas.",
+        "aparte": ["<strong>Para</strong> negocios que empiezan, marcas que se renuevan y empresas sin presencia en internet.",
+                   "<strong>Cuéntanos</strong> qué tienes ya (logotipo, web, perfiles) y qué te gustaría cambiar."],
+        "necesidad_h2": "Una sola imagen, en papel y en pantalla",
+        "necesidad": [
+            "Cuando el logotipo de la tarjeta no se parece al de la web, o las redes usan otros colores que el rótulo, el cliente tarda más en reconocerte. La coherencia transmite seriedad.",
+            "Como también producimos tus impresos, rótulos y campañas, el diseño se piensa desde el principio para funcionar en todos esos soportes, del perfil de Instagram a la fachada.",
+        ],
+        "usos_h2": "Qué diseñamos",
+        "usos": [
+            ("Logotipos e identidad visual", "El símbolo, los colores y las tipografías de tu marca, con sus normas de uso."),
+            ("Diseño gráfico", "Carteles, folletos, anuncios y cualquier pieza que necesite una buena maqueta."),
+            ("Páginas web", "Webs para empresas y comercios, pensadas para que el cliente te encuentre y te contacte."),
+            ("Redes sociales", "Diseño de publicaciones y contenido con la imagen de tu marca."),
+        ],
+        "confirmar": "Confirmar qué incluye la gestión de redes sociales (diseño de publicaciones, publicación, campañas de pago).",
+        "publico": ["Negocios nuevos", "Comercios", "Empresas", "Asociaciones", "Clubes deportivos"],
+        "huecos": [("diseno-1", "Logotipo o web diseñada para un cliente")],
+        "relacionados": ["marketing-creatividad", "imprenta", "rotulacion"],
     },
     {
         "slug": "mascotas-corporeos",
@@ -692,5 +723,10 @@ SERVICIOS = [
         "relacionados": ["merchandising", "marketing-creatividad", "gran-formato"],
     },
 ]
+
+# Logotipo de tienda y diseño web pasan a "Diseño, webs y redes sociales"
+_mc = TRABAJOS["marketing-creatividad"]
+TRABAJOS["diseno-web-redes"] = [f for f in _mc if f["src"].endswith(("-01.jpg", "-03.jpg"))]
+TRABAJOS["marketing-creatividad"] = [f for f in _mc if not f["src"].endswith(("-01.jpg", "-03.jpg"))]
 
 SERV = {s["slug"]: s for s in SERVICIOS}

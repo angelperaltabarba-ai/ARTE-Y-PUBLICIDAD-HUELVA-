@@ -62,9 +62,11 @@ def jsonld_organizacion():
         "alternateName": E["marca"],
         "url": SITE + "/",
         "logo": SITE + "/assets/img/logo-ap-512.png",
-        "areaServed": {"@type": "City", "name": "Huelva"},
+        "areaServed": [{"@type": "City", "name": "Huelva"}, {"@type": "Country", "name": "España"}],
+        "foundingDate": str(E["desde"]) if E.get("desde") else None,
         "knowsAbout": [s["nav"] for s in C.SERVICIOS],
     }
+    org = {k: v for k, v in org.items() if v is not None}
     if E["telefono"]: org["telephone"] = "+34 " + E["telefono"]
     if E["email"]: org["email"] = E["email"]
     if E["redes"]: org["sameAs"] = list(E["redes"].values())
@@ -87,7 +89,7 @@ def jsonld_migas(items):
 def jsonld_servicio(s):
     return {"@context": "https://schema.org", "@type": "Service", "name": s["nav"], "serviceType": s["nav"],
             "description": s["seo_desc"], "provider": {"@id": SITE + "/#empresa"},
-            "areaServed": {"@type": "City", "name": "Huelva"}, "url": url_abs(s["slug"])}
+            "areaServed": {"@type": "Country", "name": "España"}, "url": url_abs(s["slug"])}
 
 # ---------------------------------------------------------------- piezas comunes
 def cabecera(ctx, actual):
@@ -144,7 +146,7 @@ def pie(ctx):
     <div class="pie__rejilla">
       <div>
         <div class="pie__marca"><img src="{ctx.recurso("assets/img/logo-ap-96.png")}" width="52" height="52" alt="Logotipo de Arte &amp; Publicidad"><b>{esc(E["marca"])}</b></div>
-        <p>Publicidad, impresión, decoración, eventos, web y redes sociales en Huelva.</p>
+        <p>Publicidad, impresión, decoración, eventos, web y redes sociales. Desde Huelva, para toda España.</p>
       </div>
       <div><h2>Servicios</h2><ul>{col(C.SERVICIOS[:mitad])}</ul></div>
       <div><h2>&nbsp;<span class="visually-hidden">Más servicios</span></h2><ul>{col(C.SERVICIOS[mitad:])}</ul></div>
@@ -367,8 +369,8 @@ def pagina_inicio():
     publico = "".join(f"<li>{p}</li>" for p in ["Empresas", "Comercios", "Asociaciones", "Entidades deportivas", "Organizaciones e instituciones", "Particulares"])
     cuerpo = f'''<section class="portada sobre-azul" aria-labelledby="portada-t">
   <div class="contenedor portada__texto">
-    <h1 id="portada-t">Imprenta, rotulación, publicidad exterior y campañas en Huelva</h1>
-    <p class="entrada">Pensamos la idea, producimos las piezas y coordinamos la campaña: de una tarjeta de visita a una valla publicitaria, pasando por la fachada de tu negocio o la mascota de tu club.</p>
+    <h1 id="portada-t">Imprenta, rotulación, diseño y publicidad desde Huelva para toda España</h1>
+    <p class="entrada">Desde {E["desde"]} pensamos la idea, producimos las piezas y coordinamos la campaña: de una tarjeta de visita a una valla publicitaria, pasando por la fachada de tu negocio, tu web o la mascota de tu club.</p>
     <div class="acciones">
       <a class="boton boton--claro" href="{ctx.a("contacto")}">Pedir presupuesto</a>
       <a class="boton boton--borde" href="#servicios">Ver servicios</a>
@@ -380,7 +382,7 @@ def pagina_inicio():
 <section class="seccion" id="servicios" aria-labelledby="servicios-t">
   <div class="contenedor">
     <h2 id="servicios-t">Qué hacemos</h2>
-    <p class="entrada">Ocho áreas de trabajo que se pueden encargar por separado o combinar en un mismo proyecto.</p>
+    <p class="entrada">Imprenta, decoración de negocios, diseño, rotulación, publicidad exterior, redes sociales, webs, creatividad y estrategia publicitaria. Cada servicio se puede encargar por separado o combinar en un mismo proyecto.</p>
     <div class="familias">{fams}</div>
   </div>
 </section>
@@ -408,15 +410,14 @@ def pagina_inicio():
     <div>
       <p>Trabajamos con quien necesita comunicar algo y hacerlo bien, sea cual sea su tamaño: desde el comercio que estrena fachada hasta la entidad que organiza un evento o el club que quiere renovar su imagen.</p>
       <ul class="publico">{publico}</ul>
-      <p style="margin-top:1.5rem">Nuestra base está en Huelva, y atendemos también proyectos de fuera de la provincia.</p>
-      {pendiente_bloque("alcance geográfico", "Confirmar que la empresa atiende proyectos fuera de Huelva antes de mantener esta frase.")}
+      <p style="margin-top:1.5rem">Estamos en Huelva y trabajamos con clientes de toda España.</p>
     </div>
   </div>
 </section>
 
 {cierre(ctx, "Cuéntanos qué necesitas", "Una pieza suelta o una campaña completa: te preparamos una propuesta a medida.")}'''
-    doc = pagina(ctx, "", "Arte y Publicidad Huelva | Imprenta, rotulación, publicidad y campañas",
-                 "Empresa de publicidad en Huelva: imprenta, merchandising, rótulos y fachadas, gran formato, vallas y mupis, campañas en medios, marketing y mascotas corporativas.",
+    doc = pagina(ctx, "", "Arte y Publicidad Huelva | Imprenta, rotulación, diseño y publicidad desde 2010",
+                 "Empresa de publicidad en Huelva desde 2010: imprenta, rotulación y decoración de negocios, diseño, webs, redes sociales, publicidad exterior y campañas para toda España.",
                  cuerpo, jsonld=[jsonld_organizacion(), {"@context": "https://schema.org", "@type": "WebSite", "name": E["nombre"], "url": SITE + "/", "inLanguage": "es-ES", "publisher": {"@id": SITE + "/#empresa"}}])
     guardar("index.html", doc)
 
@@ -464,13 +465,13 @@ def pagina_sobre():
     areas = "".join(f"<li>{a.capitalize()}</li>" for a in C.AREAS_ROTULO)
     cuerpo = f'''{migas(ctx, [("Inicio", ""), ("Sobre nosotros", "sobre-nosotros")])}
 <section class="cabeza sobre-azul"><div class="contenedor"><h1>Sobre Arte &amp; Publicidad</h1>
-<p class="entrada">Una empresa de Huelva que une creatividad, producción gráfica y comunicación publicitaria.</p></div></section>
+<p class="entrada">En el sector desde {E["desde"]}. Desde Huelva, para clientes de toda España.</p></div></section>
 <section class="seccion"><div class="contenedor dos">
   <div><h2>Qué somos</h2></div>
   <div>
     <p>Arte &amp; Publicidad trabaja en publicidad, impresión, decoración, eventos, web y redes sociales. Ayudamos a empresas, comercios, asociaciones, entidades deportivas y organizaciones a comunicar lo que hacen, desde una pieza impresa hasta una campaña en varios medios.</p>
+    <p>Llevamos en el sector desde {E["desde"]}. En este tiempo hemos rotulado fachadas y vehículos, impreso todo tipo de material y creado campañas, logotipos y mascotas para clientes de Huelva y del resto de España.</p>
     <ul class="publico">{areas}</ul>
-    {pendiente_bloque("historia y equipo", "Año de inicio, trayectoria, número de personas, instalaciones y cualquier otro dato que la empresa quiera contar. No se publica nada de esto hasta que se confirme.")}
   </div>
 </div></section>
 <section class="seccion seccion--suave"><div class="contenedor">
@@ -483,7 +484,7 @@ def pagina_sobre():
 </div></section>
 <section class="seccion"><div class="contenedor dos">
   <div><h2>Dónde estamos</h2></div>
-  <div><p>Nuestra base está en Huelva.</p>
+  <div><p>Estamos en Huelva y trabajamos con clientes de toda España.</p>
   {f"<p>{esc(E['direccion']['calle'])}, {esc(E['direccion']['cp'])} {esc(E['direccion']['localidad'])}</p>" if E["direccion"] else pendiente("dirección del local o indicación de si se atiende con cita previa")}
   <p style="margin-top:1rem"><a href="{ctx.a("contacto")}">Ver formas de contacto</a></p></div>
 </div></section>
@@ -580,7 +581,7 @@ def legal_aviso(ctx):
 <li>NIF/CIF: {P("nif", "NIF/CIF")}</li>
 <li>Domicilio: {P("domicilio_social", "domicilio social")}</li>
 <li>Correo electrónico: {P("email", "correo electrónico")}</li>
-<li>Datos registrales: {P("registro", "datos registrales, si los hay")}</li></ul>
+{f'<li>Datos registrales: {esc(E["registro"])}</li>' if E["registro"] else ""}</ul>
 <h2>Objeto</h2><p>Este sitio web informa sobre los servicios de {esc(E["nombre"])} y permite solicitar información o presupuestos.</p>
 <h2>Propiedad intelectual</h2><p>Los textos, el diseño y los elementos gráficos de esta web, incluido el logotipo, pertenecen a su titular o se usan con autorización. Las imágenes de trabajos realizados se publican con permiso de los clientes correspondientes.</p>
 <h2>Responsabilidad</h2><p>El titular procura que la información publicada sea correcta y esté actualizada, pero no se responsabiliza de los errores u omisiones que pudieran existir ni del uso que se haga de ella. Los presupuestos y condiciones de cada servicio se concretan de forma individual.</p>
@@ -593,7 +594,7 @@ def legal_privacidad(ctx):
 <h2>Qué datos recogemos</h2><p>A través del <a href="{ctx.a("contacto")}">formulario de presupuesto</a> recogemos tu nombre, tu correo electrónico, el servicio que te interesa y la descripción de tu proyecto. La empresa y el teléfono son opcionales.</p>
 <h2>Para qué los usamos</h2><p>Únicamente para responder a tu solicitud y, en su caso, preparar y gestionar el presupuesto. No usamos estos datos para enviar comunicaciones comerciales.</p>
 <h2>Base legal</h2><p>La aplicación, a petición tuya, de medidas precontractuales (artículo 6.1.b del Reglamento General de Protección de Datos) y tu consentimiento al enviar el formulario.</p>
-<h2>Cuánto tiempo los conservamos</h2><p>{pendiente("plazo de conservación definido por la empresa") or "[plazo pendiente]"}</p>
+<h2>Cuánto tiempo los conservamos</h2><p>El tiempo necesario para responder a tu solicitud. Si se convierte en un encargo, durante la relación comercial y, después, durante los plazos que exija la ley.</p>
 <h2>Con quién se comparten</h2><p>Los mensajes del formulario se procesan mediante el servicio de formularios del proveedor de alojamiento de la web (Netlify, Inc.), que actúa como encargado del tratamiento y puede almacenar los datos fuera del Espacio Económico Europeo con las garantías previstas en la normativa. No se ceden datos a otros terceros salvo obligación legal.</p>
 {pendiente_bloque("proveedor", "Confirmar el proveedor final de alojamiento y formularios y revisar sus condiciones de tratamiento de datos.")}
 <h2>Tus derechos</h2><p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo al contacto indicado arriba. También puedes presentar una reclamación ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" rel="noopener">aepd.es</a>).</p>'''
