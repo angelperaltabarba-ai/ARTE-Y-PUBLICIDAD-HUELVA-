@@ -91,3 +91,11 @@ Las fotos de trabajos reales se añaden en `TRABAJOS` dentro de `contenido.py`, 
 (`imprenta`, `merchandising`, `rotulacion`, `gran-formato`, `publicidad-exterior`, `campanas`,
 `marketing-creatividad`, `mascotas-corporeos`). Cada página de servicio muestra su galería con visor
 ampliado, y la página Proyectos las reúne todas automáticamente.
+
+## Alojar la web en un hosting con PHP (Piensa Solutions, Hostinger…)
+
+`python3 build.py --php` genera `dist-hosting/`: la misma web, pero el formulario envía el correo
+con `enviar.php` (a arteypublicidad.huelva@gmail.com) en lugar de Netlify Forms, e incluye un `.htaccess`
+con HTTPS forzado, página 404 y cabeceras de seguridad. Sube el **contenido** de `dist-hosting/`
+a la carpeta pública del hosting (`public_html`, `httpdocs` o similar).
+Si el hosting exige que el remitente exista, crea el buzón `web@arteypublicidadhuelva.es` o cambia `$REMITENTE` en `hosting/enviar.php`.

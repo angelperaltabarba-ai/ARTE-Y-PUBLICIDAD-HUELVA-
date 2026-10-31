@@ -151,7 +151,7 @@
     var datos = new URLSearchParams(new FormData(form)).toString();
     fetch(form.getAttribute("data-endpoint") || "/", {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      headers: { "Content-Type": "application/x-www-form-urlencoded", "X-Requested-With": "fetch" },
       body: datos
     }).then(function (r) {
       if (!r.ok) throw new Error("HTTP " + r.status);
