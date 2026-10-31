@@ -1564,4 +1564,11 @@ PRODUCTOS = {
  ]
 }
 
+# Analítica Umami (sin cookies). Pega aquí el "Website ID" de Umami para activarla.
+# Si usas Umami Cloud, deja SCRIPT tal cual; si tienes Umami propio, pon la URL de tu script.js.
+UMAMI = {
+    "website_id": "107681a7-2692-4dda-80e1-bf8bd0d5efe4",
+    "script": "https://cloud.umami.is/script.js",
+}
+
 SERV = {s["slug"]: s for s in SERVICIOS}

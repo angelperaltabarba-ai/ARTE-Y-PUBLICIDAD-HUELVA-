@@ -214,6 +214,14 @@ def cierre(ctx, titulo="¿Tienes un proyecto en mente?", texto="Cuéntanos qué 
   </div>
 </section>'''
 
+def umami_tag():
+    u = getattr(C, "UMAMI", {}) or {}
+    if not u.get("website_id") or PREVIEW: return ""
+    return f'<script defer src="{esc(u["script"])}" data-website-id="{esc(u["website_id"])}" data-domains="{esc(SITE.split("//",1)[-1])}"></script>'
+
+def umami_activo():
+    return bool((getattr(C, "UMAMI", {}) or {}).get("website_id"))
+
 def pagina(ctx, actual, titulo, desc, cuerpo, jsonld=(), robots="index,follow", og_tipo="website", canonical=True):
     canon = url_abs(ctx.ruta)
     canon_tag = f'<link rel="canonical" href="{canon}">' if canonical else ""
@@ -255,6 +263,7 @@ def pagina(ctx, actual, titulo, desc, cuerpo, jsonld=(), robots="index,follow", 
 {pie(ctx)}
 {barra_movil(ctx, actual)}
 <script src="{r("assets/js/site.js")}" defer></script>
+{umami_tag()}
 </body>
 </html>
 '''
@@ -681,12 +690,16 @@ def legal_privacidad(ctx):
 <h2>Base legal</h2><p>La aplicación, a petición tuya, de medidas precontractuales (artículo 6.1.b del Reglamento General de Protección de Datos) y tu consentimiento al enviar el formulario.</p>
 <h2>Cuánto tiempo los conservamos</h2><p>El tiempo necesario para responder a tu solicitud. Si se convierte en un encargo, durante la relación comercial y, después, durante los plazos que exija la ley.</p>
 <h2>Con quién se comparten</h2><p>Los mensajes del formulario se procesan mediante el servicio de formularios del proveedor de alojamiento de la web (Netlify, Inc.), que actúa como encargado del tratamiento y puede almacenar los datos fuera del Espacio Económico Europeo con las garantías previstas en la normativa. No se ceden datos a otros terceros salvo obligación legal.</p>
+{"<h2>Estadísticas de visitas</h2><p>La web usa Umami para obtener estadísticas anónimas y agregadas de visitas (páginas vistas, país, tipo de dispositivo). No usa cookies ni identifica a las personas que visitan la web.</p>" if umami_activo() else ""}
 {pendiente_bloque("proveedor", "Confirmar el proveedor final de alojamiento y formularios y revisar sus condiciones de tratamiento de datos.")}
 <h2>Tus derechos</h2><p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo al contacto indicado arriba. También puedes presentar una reclamación ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" rel="noopener">aepd.es</a>).</p>'''
 
 def legal_cookies(ctx):
+    analitica = ("<h2>Estadísticas de visitas</h2><p>Para saber cuántas personas visitan la web y qué páginas consultan usamos Umami, "
+                 "una herramienta de analítica que no instala cookies, no guarda tu dirección IP completa ni crea perfiles de usuario. "
+                 "Los datos son agregados y anónimos y no se usan con fines publicitarios.</p>") if umami_activo() else ""
     return '''<h2>Qué cookies usa esta web</h2>
-<p>En su configuración actual, este sitio web no instala cookies de analítica, de publicidad ni de seguimiento, y no carga tipografías ni scripts de terceros. Por ese motivo no muestra un aviso de consentimiento.</p>
+<p>Este sitio web no instala cookies de analítica, de publicidad ni de seguimiento. Por ese motivo no muestra un aviso de consentimiento.</p>''' + analitica + '''
 <h2>Si esto cambia</h2>
 <p>Si en el futuro se añaden herramientas de analítica, mapas incrustados, vídeos de terceros u otros servicios que instalen cookies no necesarias, esta política se actualizará y se pedirá tu consentimiento antes de activarlas.</p>
 <h2>Cómo gestionar las cookies</h2>
