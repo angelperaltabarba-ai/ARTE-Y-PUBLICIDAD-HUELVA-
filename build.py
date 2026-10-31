@@ -738,6 +738,7 @@ def main():
     pagina_legal("privacidad", "Política de privacidad | Arte y Publicidad Huelva", "Política de privacidad", legal_privacidad, "Información sobre el tratamiento de datos personales en la web de Arte y Publicidad Huelva.")
     pagina_legal("cookies", "Política de cookies | Arte y Publicidad Huelva", "Política de cookies", legal_cookies, "Información sobre el uso de cookies en la web de Arte y Publicidad Huelva.")
     pagina_404(); extras()
+    if not PREVIEW and os.path.exists("_headers"): shutil.copy("_headers", os.path.join(OUT, "_headers"))  # cabeceras también para subida manual
     n = sum(len([f for f in fs if f.endswith(".html")]) for _, _, fs in os.walk(OUT))
     print(f"OK: {n} páginas HTML en {OUT}/  (SITE_URL={SITE}, BORRADOR={C.BORRADOR}, PREVIEW={PREVIEW})")
 
