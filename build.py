@@ -233,11 +233,14 @@ def pagina(ctx, actual, titulo, desc, cuerpo, jsonld=(), robots="index,follow", 
     canon_tag = f'<link rel="canonical" href="{canon}">' if canonical else ""
     scripts = "".join(f'<script type="application/ld+json">{json.dumps(j, ensure_ascii=False)}</script>' for j in jsonld)
     r = ctx.recurso
+    # Verificación de propiedad: solo en la página de inicio (la 404 comparte ruta pero no tiene canonical)
+    verificacion = '<meta name="sia-site-verification" content="abd2885bca528079882c472371d92c88">' if ctx.ruta == "" and canonical else ""
     doc = f'''<!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{verificacion}
 <title>{esc(titulo)}</title>
 <meta name="description" content="{esc(desc)}">
 <meta name="robots" content="{robots}">
